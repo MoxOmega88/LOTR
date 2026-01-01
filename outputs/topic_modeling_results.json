@@ -1,0 +1,244 @@
+{
+  "topics": {
+    "Topic 1": [
+      "gandalf",
+      "going",
+      "precious",
+      "oh",
+      "kill",
+      "little",
+      "mordor",
+      "faramir",
+      "old",
+      "legolas"
+    ],
+    "Topic 2": [
+      "merry",
+      "let",
+      "smeagol",
+      "just",
+      "right",
+      "home",
+      "orcs",
+      "wait",
+      "hobbit",
+      "world"
+    ],
+    "Topic 3": [
+      "sam",
+      "ring",
+      "say",
+      "long",
+      "don",
+      "need",
+      "think",
+      "mean",
+      "road",
+      "power"
+    ],
+    "Topic 4": [
+      "lord",
+      "king",
+      "ve",
+      "aragorn",
+      "friend",
+      "theoden",
+      "want",
+      "son",
+      "fight",
+      "got"
+    ],
+    "Topic 5": [
+      "come",
+      "yes",
+      "death",
+      "left",
+      "gimli",
+      "run",
+      "follow",
+      "gone",
+      "alive",
+      "deep"
+    ],
+    "Topic 6": [
+      "saruman",
+      "dead",
+      "gate",
+      "doing",
+      "stay",
+      "hobbits",
+      "army",
+      "war",
+      "sauron",
+      "quick"
+    ],
+    "Topic 7": [
+      "did",
+      "ll",
+      "gollum",
+      "hold",
+      "help",
+      "man",
+      "leave",
+      "hurry",
+      "like",
+      "lost"
+    ],
+    "Topic 8": [
+      "frodo",
+      "mr",
+      "know",
+      "pippin",
+      "master",
+      "good",
+      "look",
+      "father",
+      "gondor",
+      "way"
+    ]
+  },
+  "topic_labels": {
+    "Topic 1": "War & Battle",
+    "Topic 2": "Friendship & Loyalty",
+    "Topic 3": "The Ring & Power",
+    "Topic 4": "Journey & Quest",
+    "Topic 5": "Fear & Danger",
+    "Topic 6": "Hope & Courage",
+    "Topic 7": "Death & Sacrifice",
+    "Topic 8": "Home & Peace"
+  },
+  "topic_distribution": {
+    "War & Battle": 644,
+    "Fear & Danger": 287,
+    "Home & Peace": 279,
+    "The Ring & Power": 268,
+    "Death & Sacrifice": 241,
+    "Journey & Quest": 232,
+    "Friendship & Loyalty": 225,
+    "Hope & Courage": 208
+  },
+  "topics_by_movie": {
+    "Death & Sacrifice": {
+      "The Fellowship of the Ring ": 48,
+      "The Return of the King ": 97,
+      "The Two Towers ": 96
+    },
+    "Fear & Danger": {
+      "The Fellowship of the Ring ": 39,
+      "The Return of the King ": 119,
+      "The Two Towers ": 129
+    },
+    "Friendship & Loyalty": {
+      "The Fellowship of the Ring ": 45,
+      "The Return of the King ": 80,
+      "The Two Towers ": 100
+    },
+    "Home & Peace": {
+      "The Fellowship of the Ring ": 68,
+      "The Return of the King ": 105,
+      "The Two Towers ": 106
+    },
+    "Hope & Courage": {
+      "The Fellowship of the Ring ": 31,
+      "The Return of the King ": 75,
+      "The Two Towers ": 102
+    },
+    "Journey & Quest": {
+      "The Fellowship of the Ring ": 39,
+      "The Return of the King ": 81,
+      "The Two Towers ": 112
+    },
+    "The Ring & Power": {
+      "The Fellowship of the Ring ": 70,
+      "The Return of the King ": 101,
+      "The Two Towers ": 97
+    },
+    "War & Battle": {
+      "The Fellowship of the Ring ": 164,
+      "The Return of the King ": 214,
+      "The Two Towers ": 266
+    }
+  },
+  "topics_by_character": {
+    "Death & Sacrifice": {
+      "ARAGORN": 16,
+      "FRODO": 28,
+      "GANDALF": 23,
+      "GIMLI": 13,
+      "GOLLUM": 17,
+      "MERRY": 9,
+      "PIPPIN": 11,
+      "SAM": 20
+    },
+    "Fear & Danger": {
+      "ARAGORN": 23,
+      "FRODO": 21,
+      "GANDALF": 31,
+      "GIMLI": 9,
+      "GOLLUM": 18,
+      "MERRY": 14,
+      "PIPPIN": 15,
+      "SAM": 12
+    },
+    "Friendship & Loyalty": {
+      "ARAGORN": 16,
+      "FRODO": 22,
+      "GANDALF": 12,
+      "GIMLI": 17,
+      "GOLLUM": 18,
+      "MERRY": 14,
+      "PIPPIN": 25,
+      "SAM": 28
+    },
+    "Home & Peace": {
+      "ARAGORN": 16,
+      "FRODO": 18,
+      "GANDALF": 21,
+      "GIMLI": 5,
+      "GOLLUM": 14,
+      "MERRY": 30,
+      "PIPPIN": 20,
+      "SAM": 63
+    },
+    "Hope & Courage": {
+      "ARAGORN": 11,
+      "FRODO": 9,
+      "GANDALF": 21,
+      "GIMLI": 16,
+      "GOLLUM": 12,
+      "MERRY": 8,
+      "PIPPIN": 8,
+      "SAM": 14
+    },
+    "Journey & Quest": {
+      "ARAGORN": 21,
+      "FRODO": 19,
+      "GANDALF": 34,
+      "GIMLI": 6,
+      "GOLLUM": 4,
+      "MERRY": 10,
+      "PIPPIN": 12,
+      "SAM": 9
+    },
+    "The Ring & Power": {
+      "ARAGORN": 20,
+      "FRODO": 51,
+      "GANDALF": 25,
+      "GIMLI": 9,
+      "GOLLUM": 5,
+      "MERRY": 13,
+      "PIPPIN": 13,
+      "SAM": 17
+    },
+    "War & Battle": {
+      "ARAGORN": 62,
+      "FRODO": 57,
+      "GANDALF": 37,
+      "GIMLI": 40,
+      "GOLLUM": 45,
+      "MERRY": 39,
+      "PIPPIN": 59,
+      "SAM": 53
+    }
+  }
+}

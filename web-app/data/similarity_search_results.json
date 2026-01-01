@@ -1,0 +1,577 @@
+{
+  "test_searches": {
+    "You shall not pass!": [
+      {
+        "character": "GANDALF",
+        "dialog": "You shall not pass! ",
+        "movie": "The Two Towers ",
+        "sentiment": "POSITIVE",
+        "similarity": 1.0
+      },
+      {
+        "character": "GANDALF VOICE OVER",
+        "dialog": "You cannot pass! ",
+        "movie": "The Two Towers ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.840920627117157
+      },
+      {
+        "character": "HALDIR",
+        "dialog": "     You bring great evil with you ,You     can go no further! ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.4715845286846161
+      },
+      {
+        "character": "GIMLI",
+        "dialog": "Tell me what happenedand I will ease your passing. ",
+        "movie": "The Two Towers ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.4464772939682007
+      },
+      {
+        "character": "ARAGORN",
+        "dialog": "You will suffer me!  ",
+        "movie": "The Return of the King ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.44643816351890564
+      }
+    ],
+    "My precious": [
+      {
+        "character": "SMEAGOL",
+        "dialog": " My precious.  ",
+        "movie": "The Return of the King ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.9323703050613403
+      },
+      {
+        "character": "GOLLUM",
+        "dialog": "My precious!    ",
+        "movie": "The Return of the King ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.9049696922302246
+      },
+      {
+        "character": "GOLLUM",
+        "dialog": "My Precious!  ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.9049696922302246
+      },
+      {
+        "character": "GOLLUM",
+        "dialog": "     My precious!  ",
+        "movie": "The Two Towers ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.9049696922302246
+      },
+      {
+        "character": "GOLLUM",
+        "dialog": "    Yeees! , Yeees!    , Precious! My Precious!     ",
+        "movie": "The Return of the King ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.7358649969100952
+      }
+    ],
+    "One does not simply walk into Mordor": [
+      {
+        "character": "FRODO",
+        "dialog": "You know the way to Mordor? ",
+        "movie": "The Two Towers ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.7698420286178589
+      },
+      {
+        "character": "BOROMIR",
+        "dialog": "One does not simply walk into Mordor.  Its black gates     are guarded by more than just orcs. There is evil there that does not sleep     and the great eye is ever watchful.  Tis a barren wasteland, riddled     with fire and ash and dust.  The very air you breathe is a poisonous     fume.  Not with ten thousand men could you do this.    ,It is folly ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.7627878189086914
+      },
+      {
+        "character": "FRODO",
+        "dialog": "Are you saying there's another wayinto Mordor? ",
+        "movie": "The Two Towers ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.7131791710853577
+      },
+      {
+        "character": "SOLDIER",
+        "dialog": "Mordor has come.       ",
+        "movie": "The Two Towers ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.6874532103538513
+      },
+      {
+        "character": "PIPPIN",
+        "dialog": "Mordor. ",
+        "movie": "The Return of the King ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.6793457865715027
+      }
+    ],
+    "I am no man": [
+      {
+        "character": "EOWYN",
+        "dialog": "  I am no man!      ",
+        "movie": "The Return of the King ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.8964887857437134
+      },
+      {
+        "character": "WITCH KING",
+        "dialog": "  You fool!  No man can kill me.  Die now!    ",
+        "movie": "The Return of the King ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.4071478247642517
+      },
+      {
+        "character": "SARUMAN",
+        "dialog": "There will be no dawn for Men.  ",
+        "movie": "The Two Towers ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.4024564027786255
+      },
+      {
+        "character": "URUK HAI",
+        "dialog": "Man-flesh ",
+        "movie": "The Two Towers ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.3985452651977539
+      },
+      {
+        "character": "BOROMIR",
+        "dialog": "You are no elf ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.38698631525039673
+      }
+    ],
+    "For Frodo": [
+      {
+        "character": "ARAGORN",
+        "dialog": "    For Frodo.  ",
+        "movie": "The Return of the King ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.9757591485977173
+      },
+      {
+        "character": "SAM",
+        "dialog": "  That's for Frodo!     ",
+        "movie": "The Return of the King ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.8537448048591614
+      },
+      {
+        "character": "ARWEN",
+        "dialog": "Frodo ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.8228244781494141
+      },
+      {
+        "character": "PIPPIN",
+        "dialog": "    Frodo. ",
+        "movie": "The Return of the King ",
+        "sentiment": "POSITIVE",
+        "similarity": 0.8014447689056396
+      },
+      {
+        "character": "GANDALF",
+        "dialog": "Frodo ? ",
+        "movie": "The Fellowship of the Ring ",
+        "sentiment": "NEGATIVE",
+        "similarity": 0.7906701564788818
+      }
+    ]
+  },
+  "similar_pairs": [
+    {
+      "char1": "GOLLUM",
+      "dialog1": "     My precious!  ",
+      "char2": "GOLLUM",
+      "dialog2": "My precious!    ",
+      "similarity": 1.0000004768371582
+    },
+    {
+      "char1": "GOLLUM",
+      "dialog1": "     My precious!  ",
+      "char2": "GOLLUM",
+      "dialog2": "My Precious!  ",
+      "similarity": 1.0000004768371582
+    },
+    {
+      "char1": "GOLLUM",
+      "dialog1": "My precious!    ",
+      "char2": "GOLLUM",
+      "dialog2": "My Precious!  ",
+      "similarity": 1.0000004768371582
+    },
+    {
+      "char1": "LEGOLAS",
+      "dialog1": "Aragorn! ",
+      "char2": "LEGOLAS",
+      "dialog2": "Aragorn!       ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Gandalf. ",
+      "char2": "GIMLI",
+      "dialog2": "Gandalf. ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Gandalf. ",
+      "char2": "ARAGORN",
+      "dialog2": "Gandalf.           ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "GIMLI",
+      "dialog1": "Gandalf. ",
+      "char2": "ARAGORN",
+      "dialog2": "Gandalf.           ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "EOWYN",
+      "dialog1": "To battle ",
+      "char2": "MERRY",
+      "dialog2": "To battle ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "     Legolas!       ",
+      "char2": "BOROMIR",
+      "dialog2": "Legolas!  ",
+      "similarity": 1.000000238418579
+    },
+    {
+      "char1": "GANDALF",
+      "dialog1": "Yes. ",
+      "char2": "ORC",
+      "dialog2": "Yes.",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "  No!      ",
+      "char2": "SAM",
+      "dialog2": "    No!  ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "  No!      ",
+      "char2": "FRODO",
+      "dialog2": " No! ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "BILBO",
+      "dialog1": "Gandalf?       ",
+      "char2": "PIPPIN",
+      "dialog2": "Gandalf? ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "PIPPIN",
+      "dialog1": "  Frodo!     ",
+      "char2": "SAM",
+      "dialog2": "    Frodo!  ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "    No!  ",
+      "char2": "FRODO",
+      "dialog2": " No! ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "    No!  ",
+      "char2": "MERRY",
+      "dialog2": "No! ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "BOROMIR",
+      "dialog1": "For Gondor! ",
+      "char2": "CROWD",
+      "dialog2": "For Gondor! ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "SOLDIER",
+      "dialog1": "My lord!  ",
+      "char2": "GAMLING",
+      "dialog2": "My lord! ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": " Andelu i ven. ",
+      "char2": "STRIDER",
+      "dialog2": "Andelu i ven.  ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "PIPPIN",
+      "dialog1": "  Frodo!     ",
+      "char2": "SAM",
+      "dialog2": "    Frodo!  ",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "char1": "GALADRIEL VOICE-OVER",
+      "dialog1": "Frodo! , Frodo! ",
+      "char2": "MERRY",
+      "dialog2": "    Frodo! ,Frodo!     ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "     Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": " Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "FRODO",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "ARAGORN",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin!  ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "FRODO",
+      "dialog1": "Who are you ? ",
+      "char2": "BOROMIR",
+      "dialog2": " Who are you ? ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "     Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": " Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "FRODO",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin!  ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "EOWYN",
+      "dialog1": "  No.      ",
+      "char2": "FARAMIR",
+      "dialog2": "No.   ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "EOWYN",
+      "dialog1": "  No.      ",
+      "char2": "SMEAGOL",
+      "dialog2": "No. ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "GIMLI",
+      "dialog1": "Oh! ",
+      "char2": "MEN",
+      "dialog2": "Oh! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "GIMLI",
+      "dialog1": "Oh! ",
+      "char2": "GIMLI",
+      "dialog2": "     oh! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "Frodo! ",
+      "char2": "PIPPIN",
+      "dialog2": "  Frodo!     ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "Frodo! ",
+      "char2": "SAM",
+      "dialog2": "Frodo! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "Frodo! ",
+      "char2": "PIPPIN",
+      "dialog2": "  Frodo!     ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "SAM",
+      "dialog1": "Frodo! ",
+      "char2": "SAM",
+      "dialog2": "    Frodo!  ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "     Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "     Pippin! ",
+      "char2": "MERRY",
+      "dialog2": "Pippin! ",
+      "similarity": 1.0
+    },
+    {
+      "char1": "MERRY",
+      "dialog1": "     Pippin! ",
+      "char2": "MERRY",
+      "dialog2": " Pippin! ",
+      "similarity": 1.0
+    }
+  ],
+  "character_similarities": {
+    "GANDALF - ARAGORN": 0.9271275997161865,
+    "PIPPIN - MERRY": 0.906958818435669,
+    "ARAGORN - GIMLI": 0.885498046875,
+    "GOLLUM - GIMLI": 0.8845933079719543,
+    "PIPPIN - GIMLI": 0.8762863874435425,
+    "FRODO - MERRY": 0.8756736516952515,
+    "FRODO - PIPPIN": 0.8746286630630493,
+    "GANDALF - GIMLI": 0.8736187815666199,
+    "GANDALF - GOLLUM": 0.8696604371070862,
+    "FRODO - GOLLUM": 0.8687773942947388,
+    "FRODO - GIMLI": 0.865541398525238,
+    "FRODO - GANDALF": 0.8645263910293579,
+    "FRODO - ARAGORN": 0.863284707069397,
+    "MERRY - GIMLI": 0.8630791902542114,
+    "ARAGORN - PIPPIN": 0.8622971773147583,
+    "SAM - PIPPIN": 0.8612706661224365,
+    "FRODO - SAM": 0.8558050394058228,
+    "SAM - MERRY": 0.8555123805999756,
+    "ARAGORN - GOLLUM": 0.847247838973999,
+    "ARAGORN - MERRY": 0.8459068536758423,
+    "PIPPIN - GOLLUM": 0.8382316827774048,
+    "MERRY - GOLLUM": 0.8347625732421875,
+    "SAM - GANDALF": 0.833609938621521,
+    "GANDALF - PIPPIN": 0.8328824043273926,
+    "SAM - ARAGORN": 0.8231340050697327,
+    "SAM - GOLLUM": 0.8217654228210449,
+    "GANDALF - MERRY": 0.8134214878082275,
+    "SAM - GIMLI": 0.8074958324432373
+  },
+  "search_stats": {
+    "total_dialogs": 2384,
+    "embedding_dimension": 384,
+    "characters_analyzed": 8,
+    "similar_pairs_found": 235
+  }
+}

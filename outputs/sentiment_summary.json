@@ -1,0 +1,155 @@
+{
+  "overall_sentiment": {
+    "POSITIVE": 1089,
+    "NEGATIVE": 1295
+  },
+  "character_sentiment": [
+    {
+      "Character": "FRODO",
+      "Total Lines": 225,
+      "Positive": 99,
+      "Negative": 126,
+      "Positive %": 44.0,
+      "Negative %": 56.0,
+      "Avg Confidence": 0.97
+    },
+    {
+      "Character": "SAM",
+      "Total Lines": 216,
+      "Positive": 83,
+      "Negative": 133,
+      "Positive %": 38.4,
+      "Negative %": 61.6,
+      "Avg Confidence": 0.96
+    },
+    {
+      "Character": "GANDALF",
+      "Total Lines": 204,
+      "Positive": 100,
+      "Negative": 104,
+      "Positive %": 49.0,
+      "Negative %": 51.0,
+      "Avg Confidence": 0.95
+    },
+    {
+      "Character": "ARAGORN",
+      "Total Lines": 185,
+      "Positive": 90,
+      "Negative": 95,
+      "Positive %": 48.6,
+      "Negative %": 51.4,
+      "Avg Confidence": 0.94
+    },
+    {
+      "Character": "PIPPIN",
+      "Total Lines": 163,
+      "Positive": 79,
+      "Negative": 84,
+      "Positive %": 48.5,
+      "Negative %": 51.5,
+      "Avg Confidence": 0.96
+    },
+    {
+      "Character": "MERRY",
+      "Total Lines": 137,
+      "Positive": 73,
+      "Negative": 64,
+      "Positive %": 53.3,
+      "Negative %": 46.7,
+      "Avg Confidence": 0.96
+    },
+    {
+      "Character": "GOLLUM",
+      "Total Lines": 133,
+      "Positive": 53,
+      "Negative": 80,
+      "Positive %": 39.8,
+      "Negative %": 60.2,
+      "Avg Confidence": 0.96
+    },
+    {
+      "Character": "GIMLI",
+      "Total Lines": 115,
+      "Positive": 52,
+      "Negative": 63,
+      "Positive %": 45.2,
+      "Negative %": 54.8,
+      "Avg Confidence": 0.97
+    },
+    {
+      "Character": "THEODEN",
+      "Total Lines": 109,
+      "Positive": 48,
+      "Negative": 61,
+      "Positive %": 44.0,
+      "Negative %": 56.0,
+      "Avg Confidence": 0.95
+    },
+    {
+      "Character": "FARAMIR",
+      "Total Lines": 65,
+      "Positive": 26,
+      "Negative": 39,
+      "Positive %": 40.0,
+      "Negative %": 60.0,
+      "Avg Confidence": 0.98
+    },
+    {
+      "Character": "EOWYN",
+      "Total Lines": 55,
+      "Positive": 24,
+      "Negative": 31,
+      "Positive %": 43.6,
+      "Negative %": 56.4,
+      "Avg Confidence": 0.95
+    },
+    {
+      "Character": "LEGOLAS",
+      "Total Lines": 55,
+      "Positive": 27,
+      "Negative": 28,
+      "Positive %": 49.1,
+      "Negative %": 50.9,
+      "Avg Confidence": 0.95
+    },
+    {
+      "Character": "SMEAGOL",
+      "Total Lines": 49,
+      "Positive": 25,
+      "Negative": 24,
+      "Positive %": 51.0,
+      "Negative %": 49.0,
+      "Avg Confidence": 0.97
+    },
+    {
+      "Character": "BILBO",
+      "Total Lines": 46,
+      "Positive": 25,
+      "Negative": 21,
+      "Positive %": 54.3,
+      "Negative %": 45.7,
+      "Avg Confidence": 0.97
+    },
+    {
+      "Character": "DENETHOR",
+      "Total Lines": 45,
+      "Positive": 16,
+      "Negative": 29,
+      "Positive %": 35.6,
+      "Negative %": 64.4,
+      "Avg Confidence": 0.95
+    }
+  ],
+  "movie_sentiment": {
+    "POSITIVE": {
+      "The Fellowship of the Ring ": 52.976190476190474,
+      "The Return of the King ": 46.674311926605505,
+      "The Two Towers ": 41.17063492063492
+    },
+    "NEGATIVE": {
+      "The Fellowship of the Ring ": 47.023809523809526,
+      "The Return of the King ": 53.325688073394495,
+      "The Two Towers ": 58.82936507936508
+    }
+  }
+}

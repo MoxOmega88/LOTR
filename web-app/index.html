@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lord of the Rings - ML Explorer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #8B7355;
+            --deep-brown: #2C1810;
+            --rich-brown: #4A2511;
+            --cream: #F5E6D3;
+            --dark-green: #1A3A1A;
+            --muted-green: #4A6741;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #0F0F0F 0%, #2C1810 50%, #1A3A1A 100%);
+            color: var(--cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(74, 103, 65, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(44, 24, 16, 0.8) 0%, transparent 100%);
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '⚔';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            color: var(--gold);
+            background: var(--deep-brown);
+            padding: 10px 20px;
+            border-radius: 50%;
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: glow 3s ease-in-out infinite;
+        }
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gold);
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            padding: 20px;
+        }
+        
+        .nav-btn {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--rich-brown) 0%, var(--deep-brown) 100%);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 15px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: var(--deep-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .nav-btn.active {
+            background: var(--gold);
+            color: var(--deep-brown);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: linear-gradient(135deg, rgba(44, 24, 16, 0.9) 0%, rgba(26, 58, 26, 0.8) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold), var(--gold));
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .card:hover::before {
+            opacity: 0.3;
+        }
+        
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .question-card {
+            background: rgba(74, 37, 17, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--cream);
+            font-weight: 600;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            background: rgba(44, 24, 16, 0.8);
+            border: 2px solid var(--dark-gold);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .option:hover {
+            background: rgba(74, 103, 65, 0.4);
+            border-color: var(--gold);
+            transform: translateX(10px);
+        }
+        
+        .option.selected {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: var(--deep-brown);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+        
+        /* Image Options */
+        .option-with-image {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+        }
+        
+        .option-image {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--dark-gold);
+        }
+        
+        .option.selected .option-image {
+            border-color: var(--deep-brown);
+        }
+        
+        .quiz-progress {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .progress-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            border: 2px solid var(--dark-gold);
+            transition: all 0.3s;
+        }
+        
+        .progress-dot.active {
+            background: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+            transform: scale(1.2);
+        }
+        
+        .progress-dot.completed {
+            background: var(--muted-green);
+            border-color: var(--muted-green);
+        }
+        
+        .result-card {
+            text-align: center;
+            padding: 50px;
+        }
+        
+        .result-character-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            animation: scaleIn 0.8s ease-out;
+        }
+        
+        .result-character {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: scaleIn 0.8s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .result-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--dark-gold);
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 3px solid var(--gold);
+            background: rgba(74, 37, 17, 0.4);
+        }
+        
+        .result-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--cream);
+            margin-top: 20px;
+        }
+        
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            background: rgba(44, 24, 16, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--dark-gold);
+        }
+        
+        .stat-label {
+            color: var(--dark-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: var(--deep-brown);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .sentiment-item {
+            background: rgba(44, 24, 16, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .sentiment-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .character-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            margin: 0 auto 15px;
+            display: block;
+        }
+        
+        .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .sentiment-bar {
+            height: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .sentiment-fill {
+            height: 100%;
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .positive-bar {
+            background: linear-gradient(90deg, #4A6741 0%, #6B9A5B 100%);
+        }
+        
+        .negative-bar {
+            background: linear-gradient(90deg, #8B4513 0%, #A0522D 100%);
+        }
+        
+        .search-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.1rem;
+            background: rgba(44, 24, 16, 0.8);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            color: var(--cream);
+            font-family: 'Lato', sans-serif;
+            margin-bottom: 30px;
+        }
+        
+        .search-box::placeholder {
+            color: var(--dark-gold);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .search-result {
+            background: rgba(74, 37, 17, 0.6);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--gold);
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .search-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .result-character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+        
+        .similarity-score {
+            background: var(--gold);
+            color: var(--deep-brown);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        
+        .result-dialog {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--cream);
+            margin: 10px 0;
+        }
+        
+        .result-meta {
+            color: var(--dark-gold);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .topic-card {
+            background: rgba(44, 24, 16, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--dark-gold);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .topic-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid var(--dark-gold);
+        }
+        
+        .topic-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .topic-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .topic-word {
+            background: rgba(74, 103, 65, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--muted-green);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .sentiment-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .result-character-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .option-with-image {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .option-image {
+                width: 100%;
+                height: 100px;
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-top: 4px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Image grid for location and weapon questions */
+        .image-grid-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .image-option-card {
+            background: rgba(44, 24, 16, 0.8);
+            border: 2px solid var(--dark-gold);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .image-option-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .image-option-card.selected {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            border-color: var(--gold);
+            color: var(--deep-brown);
+            font-weight: 600;
+        }
+        
+        .image-option-img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 2px solid var(--dark-gold);
+        }
+        
+        .image-option-card.selected .image-option-img {
+            border-color: var(--deep-brown);
+        }
+        
+        @media (max-width: 480px) {
+            .image-grid-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Lord of the Rings</h1>
+            <h3>One Ring to Rule Them All</h3>
+            <p class="subtitle">A Machine Learning Explorer for LOTR Geeks</p>
+        </header>
+        
+        <nav>
+            <button class="nav-btn active" onclick="showSection('quiz')">Character Quiz</button>
+            <button class="nav-btn" onclick="showSection('sentiment')">Sentiment Analysis</button>
+            <button class="nav-btn" onclick="showSection('search')">Dialog Search</button>
+            <button class="nav-btn" onclick="showSection('topics')">Topics</button>
+        </nav>
+        
+        <!-- Quiz Section -->
+        <div id="quiz" class="section active">
+            <div class="card quiz-container">
+                <h2 class="card-title">Which Character Are You?</h2>
+                
+                <div id="quizStart">
+                    <p style="text-align: center; font-size: 1.2rem; line-height: 1.8; margin: 30px 0;">
+                        Answer 12 immersive questions to discover which Lord of the Rings character matches your personality, 
+                        based on AI analysis of dialog patterns, sentiment, and character traits from all three films.
+                    </p>
+                    <div style="text-align: center;">
+                        <button class="btn" onclick="startQuiz()">Begin Your Journey</button>
+                    </div>
+                </div>
+                
+                <div id="quizQuestions" style="display: none;">
+                    <div class="quiz-progress" id="progressDots"></div>
+                    <div id="questionContainer"></div>
+                    <div style="text-align: center; margin-top: 30px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">Previous</button>
+                        <button class="btn" onclick="nextQuestion()" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                
+                <div id="quizResult" style="display: none;">
+                    <div class="result-card">
+                        <h3 style="color: var(--dark-gold); font-size: 1.5rem;">You are...</h3>
+                        <img id="resultCharacterImage" class="result-character-image" src="" alt="Character">
+                        <div class="result-character" id="resultCharacter"></div>
+                        <div class="result-quote" id="resultQuote"></div>
+                        <div class="result-description" id="resultDescription"></div>
+                        <div class="result-stats" id="resultStats"></div>
+                        <div style="margin-top: 40px;">
+                            <button class="btn" onclick="restartQuiz()">Take Quiz Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sentiment Section -->
+        <div id="sentiment" class="section">
+            <div class="card">
+                <h2 class="card-title">Character Sentiment Analysis</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--dark-gold);">
+                    AI-powered emotional analysis of character dialogs throughout the trilogy
+                </p>
+                <div class="sentiment-grid" id="sentimentGrid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading sentiment data...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search Section -->
+        <div id="search" class="section">
+            <div class="card search-container">
+                <h2 class="card-title">Dialog Similarity Search</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--dark-gold);">
+                    Find dialogs similar to any quote using AI embeddings
+                </p>
+                <input type="text" class="search-box" id="searchInput" 
+                       placeholder="Enter a quote (e.g., 'You shall not pass!')" 
+                       onkeypress="handleSearchEnter(event)">
+                <button class="btn" onclick="performSearch()" style="width: 100%; margin-bottom: 30px;">Search</button>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+        
+        <!-- Topics Section -->
+        <div id="topics" class="section">
+            <div class="card">
+                <h2 class="card-title">Discovered Themes</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--dark-gold);">
+                    AI-discovered topics from 2,390 lines of dialog using topic modeling
+                </p>
+                <div class="topics-grid" id="topicsGrid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading topics...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global data storage
+        let quizData = null;
+        let sentimentData = null;
+        let topicsData = null;
+        
+        let currentQuestion = 0;
+        let userAnswers = [];
+        
+        // Character images mapping - using your local files
+        const characterImages = {
+            'GANDALF': 'assets/images/characters/gandalf.jpg',
+            'FRODO': 'assets/images/characters/frodo.jpg',
+            'SAM': 'assets/images/characters/sam.jpg',
+            'ARAGORN': 'assets/images/characters/aragorn.jpg',
+            'LEGOLAS': 'assets/images/characters/legolas.jpg',
+            'GIMLI': 'assets/images/characters/gimli.jpg',
+            'BOROMIR': 'assets/images/characters/boromir.jpg',
+            'ÉOWYN': 'assets/images/characters/eowyn.jpg',
+            'MERRY': 'assets/images/characters/merry.jpg',
+            'PIPPIN': 'assets/images/characters/pippin.jpg',
+            'GALADRIEL': 'assets/images/characters/galadriel.jpg',
+            'ELROND': 'assets/images/characters/elrond.jpg',
+            'FARAMIR': 'assets/images/characters/faramir.avif',
+            'THEODEN': 'assets/images/characters/theoden2.jpg',
+            'SARUMAN': 'assets/images/characters/saruman.jpg',
+            'GOLLUM': 'assets/images/characters/gollum.jpg'
+        };
+        
+        // Topic images mapping - using your local files
+        const topicImages = {
+            'Topic 1': 'assets/images/topics/war.webp',
+            'Topic 2': 'assets/images/topics/friendship.jpg',
+            'Topic 3': 'assets/images/topics/ring.webp',
+            'Topic 4': 'assets/images/topics/journey.avif',
+            'Topic 5': 'assets/images/topics/fear.avif',
+            'Topic 6': 'assets/images/topics/hope.jpg',
+            'Topic 7': 'assets/images/topics/sacrifice.avif',
+            'Topic 8': 'assets/images/topics/home.jpg'
+        };
+        
+        // Location images - using your local files
+        const locationImages = {
+            'The Shire': 'assets/images/locations/shire.jpg',
+            'Rivendell': 'assets/images/locations/rivendell.jpg',
+            'Minas Tirith': 'assets/images/locations/minas-tirith.jpg',
+            'Rohan': 'assets/images/locations/rohan.jpg',
+            'Mines of Moria': 'assets/images/locations/moria.jpg',
+            'Lothlórien': 'assets/images/locations/lothlorien.jpg',
+            'Mordor': 'assets/images/locations/mordor2.webp'
+        };
+        
+        // Weapon images - using your local files
+        const weaponImages = {
+            'Aragorn\'s Sword (Andúril)': 'assets/images/weapons/anduril.webp',
+            'Gandalf\'s Staff': 'assets/images/weapons/staff.jpg',
+            'Legolas\' Bow': 'assets/images/weapons/bow.jpg',
+            'Gimli\'s Axe': 'assets/images/weapons/axe.jpg',
+            'Sam\'s Dagger (Sting)': 'assets/images/weapons/sting.jpg',
+            'Éowyn\'s Sword': 'assets/images/weapons/eowynsword.jpg',
+            'Frodo\'s Sword (Sting)': 'assets/images/weapons/sting.jpg',
+            'Boromir\'s Sword': 'assets/images/weapons/boromirsword.jpg'
+        };
+        
+        // Load all data
+        async function loadAllData() {
+            try {
+                // Load quiz data
+                quizData = getEnhancedQuizData(); // Using enhanced quiz data with all questions
+                
+                // Load sentiment data
+                await loadSentimentData();
+                
+                // Load topics data
+                await loadTopicsData();
+                
+                console.log('✅ All data loaded successfully');
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Fallback to sample data if real data fails to load
+                sentimentData = getSampleSentimentData();
+                topicsData = getSampleTopicsData();
+                
+                // Render with sample data
+                renderSentimentData();
+                renderTopicsData();
+            }
+            // Add this function to debug image loading
+function debugImageLoading() {
+    console.log('=== DEBUGGING IMAGE PATHS ===');
+    
+    // Check character images
+    Object.entries(characterImages).forEach(([char, path]) => {
+        console.log(`${char}: ${path}`);
+    });
+    
+    // Test loading one image
+    const testImg = new Image();
+    testImg.src = characterImages['GANDALF'];
+    testImg.onload = () => console.log('✅ Gandalf image loaded successfully');
+    testImg.onerror = () => console.log('❌ Gandalf image failed to load:', characterImages['GANDALF']);
+}
+        }
+        
+        // Enhanced Quiz Data with 12 questions and expanded character options
+        function getEnhancedQuizData() {
+            return {
+                questions: [
+                    {
+                        question: "When faced with overwhelming danger, you:",
+                        options: [
+                            { text: "Face it head-on, no matter the cost", traits: ["brave", "courageous", "determined"] },
+                            { text: "Seek wisdom before acting", traits: ["wise", "thoughtful", "strategic"] },
+                            { text: "Stand by your friends, supporting them", traits: ["loyal", "devoted", "protective"] },
+                            { text: "Use cunning and deception", traits: ["cunning", "clever", "manipulative"] },
+                            { text: "Let fate guide your actions", traits: ["mystical", "wise", "serene"] },
+                            { text: "Make a tactical retreat to fight another day", traits: ["pragmatic", "wise", "strategic"] },
+                            { text: "Inspire others with your courage", traits: ["leader", "noble", "inspiring"] }
+                        ]
+                    },
+                    {
+                        question: "Your greatest strength is:",
+                        options: [
+                            { text: "My unwavering loyalty", traits: ["loyal", "devoted", "humble"] },
+                            { text: "My wisdom and knowledge", traits: ["wise", "eloquent", "mysterious"] },
+                            { text: "My combat skills", traits: ["skilled", "action-oriented", "fierce"] },
+                            { text: "My determination", traits: ["determined", "brave", "serious"] },
+                            { text: "My keen senses and awareness", traits: ["alert", "graceful", "perceptive"] },
+                            { text: "My sense of humor in dark times", traits: ["humorous", "optimistic", "mischievous"] },
+                            { text: "My connection to nature", traits: ["natural", "spiritual", "ancient"] }
+                        ]
+                    },
+                    {
+                        question: "In a group, you are usually:",
+                        options: [
+                            { text: "The wise advisor", traits: ["wise", "thoughtful", "protective"] },
+                            { text: "The natural leader", traits: ["leader", "noble", "courageous"] },
+                            { text: "The loyal companion", traits: ["loyal", "humble", "devoted"] },
+                            { text: "The comic relief", traits: ["humorous", "mischievous", "curious"] },
+                            { text: "The skilled specialist", traits: ["skilled", "focused", "professional"] },
+                            { text: "The quiet observer", traits: ["observant", "thoughtful", "mysterious"] },
+                            { text: "The protective guardian", traits: ["protective", "brave", "devoted"] }
+                        ]
+                    },
+                    {
+                        question: "What motivates you most?",
+                        options: [
+                            { text: "Protecting those I love", traits: ["protective", "loyal", "brave"] },
+                            { text: "Fulfilling my destiny", traits: ["noble", "determined", "burdened"] },
+                            { text: "Seeking power and knowledge", traits: ["ambitious", "powerful", "cunning"] },
+                            { text: "Preserving the greater good", traits: ["wise", "balanced", "compassionate"] },
+                            { text: "Redemption and honor", traits: ["honorable", "determined", "burdened"] },
+                            { text: "Simple pleasures and comfort", traits: ["simple", "comfortable", "peaceful"] },
+                            { text: "Justice and righteousness", traits: ["just", "noble", "determined"] }
+                        ]
+                    },
+                    {
+                        question: "Your speaking style is:",
+                        options: [
+                            { text: "Wise and poetic", traits: ["wise", "eloquent", "mysterious"] },
+                            { text: "Direct and to the point", traits: ["direct", "action-oriented", "fierce"] },
+                            { text: "Warm and encouraging", traits: ["optimistic", "compassionate", "devoted"] },
+                            { text: "Witty with humor", traits: ["humorous", "clever", "mischievous"] },
+                            { text: "Bold and commanding", traits: ["leader", "confident", "noble"] },
+                            { text: "Laconic and precise", traits: ["concise", "focused", "skilled"] },
+                            { text: "Ancient and mystical", traits: ["ancient", "wise", "mysterious"] }
+                        ]
+                    },
+                    {
+                        question: "When tempted by power, you:",
+                        options: [
+                            { text: "Resist with all your might", traits: ["brave", "determined", "noble"] },
+                            { text: "Feel the weight of the burden", traits: ["burdened", "conflicted", "serious"] },
+                            { text: "Are not interested - loyalty matters more", traits: ["loyal", "humble", "devoted"] },
+                            { text: "Would be tempted to use it", traits: ["ambitious", "conflicted", "cunning"] },
+                            { text: "Would study it carefully", traits: ["wise", "curious", "thoughtful"] },
+                            { text: "Would destroy it without hesitation", traits: ["brave", "determined", "fierce"] },
+                            { text: "Would hide it from others", traits: ["protective", "wise", "cautious"] }
+                        ]
+                    },
+                    {
+                        question: "Your ideal role in a quest:",
+                        options: [
+                            { text: "The ringbearer - carrying the burden", traits: ["brave", "burdened", "determined"] },
+                            { text: "The guide who shows the way", traits: ["wise", "powerful", "protective"] },
+                            { text: "The faithful companion", traits: ["loyal", "devoted", "optimistic"] },
+                            { text: "The skilled warrior", traits: ["skilled", "fierce", "courageous"] },
+                            { text: "The strategist and planner", traits: ["wise", "strategic", "leader"] },
+                            { text: "The scout and hunter", traits: ["skilled", "alert", "graceful"] },
+                            { text: "The guardian of the group", traits: ["protective", "brave", "loyal"] }
+                        ]
+                    },
+                    {
+                        question: "How do you handle conflict?",
+                        options: [
+                            { text: "With diplomatic wisdom", traits: ["wise", "balanced", "thoughtful"] },
+                            { text: "With fierce determination", traits: ["fierce", "stubborn", "brave"] },
+                            { text: "By supporting others", traits: ["loyal", "protective", "humble"] },
+                            { text: "With cunning strategy", traits: ["clever", "cunning", "strategic"] },
+                            { text: "With honor and courage", traits: ["honorable", "brave", "noble"] },
+                            { text: "By avoiding unnecessary fights", traits: ["wise", "pragmatic", "peaceful"] },
+                            { text: "With overwhelming force", traits: ["powerful", "fierce", "determined"] }
+                        ]
+                    },
+                    {
+                        question: "Where would you find the most comfort?",
+                        type: "location",
+                        options: [
+                            { text: "The Shire", traits: ["simple", "peaceful", "comfortable", "humble", "joyful"] },
+                            { text: "Rivendell", traits: ["wise", "serene", "ancient", "mysterious", "peaceful"] },
+                            { text: "Minas Tirith", traits: ["noble", "protective", "determined", "honorable", "leader"] },
+                            { text: "Rohan", traits: ["free", "brave", "courageous", "proud", "natural"] },
+                            { text: "Mines of Moria", traits: ["ancient", "wise", "skilled", "determined", "courageous"] },
+                            { text: "Lothlórien", traits: ["graceful", "ancient", "mysterious", "wise", "protective"] },
+                            { text: "Mordor", traits: ["ambitious", "powerful", "determined", "fierce", "dark"] }
+                        ]
+                    },
+                    {
+                        question: "What's your preferred weapon?",
+                        type: "weapon",
+                        options: [
+                            { text: "Aragorn's Sword (Andúril)", traits: ["noble", "honorable", "leader", "determined", "brave"] },
+                            { text: "Gandalf's Staff", traits: ["wise", "powerful", "mysterious", "protective", "guide"] },
+                            { text: "Legolas' Bow", traits: ["graceful", "skilled", "alert", "precise", "focused"] },
+                            { text: "Gimli's Axe", traits: ["fierce", "loyal", "stubborn", "brave", "determined"] },
+                            { text: "Sam's Dagger (Sting)", traits: ["loyal", "protective", "brave", "humble", "determined"] },
+                            { text: "Éowyn's Sword", traits: ["brave", "determined", "protective", "courageous", "unexpected"] },
+                            { text: "Boromir's Sword", traits: ["brave", "honorable", "protective", "determined", "proud"] }
+                        ]
+                    },
+                    {
+                        question: "Which magical item calls to you?",
+                        options: [
+                            { text: "The One Ring - ultimate power", traits: ["powerful", "ambitious", "cunning", "corruptible"] },
+                            { text: "The Palantír - seeing far and wide", traits: ["wise", "curious", "powerful", "burdened"] },
+                            { text: "The Phial of Galadriel - light in darkness", traits: ["protective", "hopeful", "wise", "pure"] },
+                            { text: "The Evenstar - eternal love", traits: ["loving", "devoted", "romantic", "faithful"] },
+                            { text: "The Mithril Shirt - ultimate protection", traits: ["protective", "pragmatic", "wise", "prepared"] },
+                            { text: "The Elven Rope - practical magic", traits: ["practical", "resourceful", "clever", "prepared"] },
+                            { text: "Lembas Bread - sustaining essentials", traits: ["practical", "nourishing", "humble", "essential"] }
+                        ]
+                    },
+                    {
+                        question: "What's your approach to friendship?",
+                        options: [
+                            { text: "Unwavering loyalty to the end", traits: ["loyal", "devoted", "faithful", "protective"] },
+                            { text: "Mentor and guide to others", traits: ["wise", "protective", "teaching", "supportive"] },
+                            { text: "Comrades in arms and battle", traits: ["brave", "loyal", "courageous", "protective"] },
+                            { text: "Finding humor together", traits: ["humorous", "optimistic", "joyful", "supportive"] },
+                            { text: "Respect through skill and competence", traits: ["skilled", "respectful", "professional", "reliable"] },
+                            { text: "Ancient bonds and understanding", traits: ["ancient", "wise", "deep", "mysterious"] },
+                            { text: "Protective and nurturing", traits: ["protective", "nurturing", "caring", "devoted"] }
+                        ]
+                    }
+                ],
+                characters: {
+                    "GANDALF": {
+                        traits: ["wise", "powerful", "protective", "mysterious", "eloquent", "guide", "ancient"],
+                        quote: "All we have to decide is what to do with the time that is given us",
+                        description: "You are a wise guide who protects and leads others through darkness with knowledge and power. Your wisdom is sought by many, and your power is matched only by your compassion.",
+                        total_lines: 568
+                    },
+                    "FRODO": {
+                        traits: ["brave", "burdened", "determined", "compassionate", "humble", "resilient"],
+                        quote: "I will take the Ring to Mordor, though I do not know the way",
+                        description: "You carry great burdens with courage and never give up, even when the weight seems unbearable. Your quiet strength inspires others to continue when all hope seems lost.",
+                        total_lines: 512
+                    },
+                    "SAM": {
+                        traits: ["loyal", "devoted", "optimistic", "humble", "brave", "protective", "nurturing"],
+                        quote: "I can't carry it for you, but I can carry you",
+                        description: "You are the truest friend anyone could ask for, standing by loved ones through any trial. Your simple wisdom and unwavering loyalty make you the heart of any group.",
+                        total_lines: 398
+                    },
+                    "ARAGORN": {
+                        traits: ["noble", "leader", "courageous", "humble", "determined", "honorable", "protector"],
+                        quote: "A day may come when the courage of men fails, but it is not this day",
+                        description: "You are born to lead, inspiring others with nobility and strength even when doubting yourself. Your journey from uncertainty to kingship shows that true leadership comes from character.",
+                        total_lines: 445
+                    },
+                    "LEGOLAS": {
+                        traits: ["graceful", "skilled", "observant", "loyal", "alert", "precise", "focused"],
+                        quote: "A red sun rises. Blood has been spilled this night",
+                        description: "You move through life with grace and precision, seeing what others miss. Your keen senses and loyalty make you an invaluable companion in any perilous journey.",
+                        total_lines: 267
+                    },
+                    "GIMLI": {
+                        traits: ["fierce", "loyal", "stubborn", "humorous", "brave", "determined", "proud"],
+                        quote: "Nobody tosses a dwarf!",
+                        description: "You are fiercely loyal and surprisingly funny, never backing down from a challenge. Your gruff exterior hides a heart of gold and an unbreakable spirit.",
+                        total_lines: 234
+                    },
+                    "BOROMIR": {
+                        traits: ["brave", "honorable", "conflicted", "protective", "determined", "proud"],
+                        quote: "One does not simply walk into Mordor",
+                        description: "You are torn between duty and desire, but ultimately fight for what's right. Your struggle with temptation makes your eventual redemption all the more powerful.",
+                        total_lines: 189
+                    },
+                    "ÉOWYN": {
+                        traits: ["brave", "determined", "protective", "courageous", "unexpected", "strong"],
+                        quote: "I am no man!",
+                        description: "You defy expectations and show incredible courage when it matters most. Breaking free from traditional roles, you prove that true strength comes from within.",
+                        total_lines: 156
+                    },
+                    "MERRY": {
+                        traits: ["loyal", "brave", "clever", "determined", "protective"],
+                        quote: "But it's not your fault, you couldn't have known",
+                        description: "You may be small in stature but large in heart and courage. Your loyalty to friends drives you to accomplish feats no one expected.",
+                        total_lines: 176
+                    },
+                    "PIPPIN": {
+                        traits: ["curious", "humorous", "loyal", "brave", "optimistic"],
+                        quote: "I didn't think it would end this way",
+                        description: "Your curiosity and humor bring light to dark times, and your unexpected bravery saves the day when it matters most.",
+                        total_lines: 189
+                    },
+                    "GALADRIEL": {
+                        traits: ["wise", "ancient", "mysterious", "powerful", "protective", "serene"],
+                        quote: "Even the smallest person can change the course of the future",
+                        description: "You possess ancient wisdom and power that you use to protect and guide others. Your presence brings light to dark places.",
+                        total_lines: 89
+                    },
+                    "ELROND": {
+                        traits: ["wise", "ancient", "protective", "diplomatic", "noble"],
+                        quote: "The ring cannot stay here. This evil belongs to all of Middle-earth",
+                        description: "You are a wise leader who sees the bigger picture and makes difficult decisions for the greater good.",
+                        total_lines: 112
+                    },
+                    "FARAMIR": {
+                        traits: ["honorable", "wise", "brave", "protective", "noble"],
+                        quote: "I do not love the bright sword for its sharpness, nor the arrow for its swiftness",
+                        description: "You value wisdom over violence and always strive to do what's right, even when it's difficult.",
+                        total_lines: 145
+                    },
+                    "THÉODEN": {
+                        traits: ["leader", "brave", "determined", "noble", "protective"],
+                        quote: "Where is the horse and the rider? Where is the horn that was blowing?",
+                        description: "You are a leader who overcomes despair to inspire others and lead them to victory against overwhelming odds.",
+                        total_lines: 167
+                    },
+                    "SARUMAN": {
+                        traits: ["powerful", "ambitious", "wise", "cunning", "corruptible"],
+                        quote: "We must join with him, Gandalf. We must join with Sauron",
+                        description: "You are incredibly powerful and knowledgeable, but your ambition leads you down a dark path.",
+                        total_lines: 134
+                    },
+                    "GOLLUM": {
+                        traits: ["cunning", "conflicted", "obsessive", "resourceful", "corrupted"],
+                        quote: "My precious...",
+                        description: "You are torn between your better nature and the corrupting influence of power, showing the tragic cost of obsession.",
+                        total_lines: 278
+                    }
+                }
+            };
+        }
+        
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Quiz Functions
+        function startQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            document.getElementById('quizStart').style.display = 'none';
+            document.getElementById('quizQuestions').style.display = 'block';
+            renderQuestion();
+        }
+        
+        function renderQuestion() {
+            const question = quizData.questions[currentQuestion];
+            const container = document.getElementById('questionContainer');
+            
+            // Update progress dots
+            const progressDots = document.getElementById('progressDots');
+            progressDots.innerHTML = quizData.questions.map((_, idx) => 
+                `<div class="progress-dot ${idx === currentQuestion ? 'active' : ''} ${idx < currentQuestion ? 'completed' : ''}"></div>`
+            ).join('');
+            
+            // Determine question type
+            const isImageQuestion = question.type === 'location' || question.type === 'weapon';
+            
+            let optionsHtml = '';
+            if (isImageQuestion) {
+                optionsHtml = `
+                    <div class="image-grid-options">
+                        ${question.options.map((opt, idx) => {
+                            const imageUrl = question.type === 'location' 
+                                ? (locationImages[opt.text] || `https://via.placeholder.com/180x100?text=${encodeURIComponent(opt.text)}`)
+                                : (weaponImages[opt.text] || `https://via.placeholder.com/180x100?text=${encodeURIComponent(opt.text)}`);
+                            
+                            return `
+                                <div class="image-option-card ${userAnswers[currentQuestion] === idx ? 'selected' : ''}" 
+                                     onclick="selectOption(${idx})">
+                                    <img src="${imageUrl}" 
+                                         alt="${opt.text}" 
+                                         class="image-option-img"
+                                         onerror="this.src='https://via.placeholder.com/180x100?text=${encodeURIComponent(opt.text)}'">
+                                    <div>${opt.text}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else {
+                optionsHtml = `
+                    <div class="options">
+                        ${question.options.map((opt, idx) => `
+                            <div class="option ${userAnswers[currentQuestion] === idx ? 'selected' : ''}" 
+                                 onclick="selectOption(${idx})">
+                                ${opt.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-text">${currentQuestion + 1}. ${question.question}</div>
+                    ${optionsHtml}
+                </div>
+            `;
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentQuestion === quizData.questions.length - 1 ? 'See Results' : 'Next';
+        }
+        
+        function selectOption(optionIdx) {
+            userAnswers[currentQuestion] = optionIdx;
+            renderQuestion();
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+        
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === undefined) {
+                alert('Please select an answer before continuing');
+                return;
+            }
+            
+            if (currentQuestion < quizData.questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                calculateResult();
+            }
+        }
+        
+        function calculateResult() {
+            // Count traits
+            const traitCounts = {};
+            userAnswers.forEach((answerIdx, questionIdx) => {
+                const traits = quizData.questions[questionIdx].options[answerIdx].traits;
+                traits.forEach(trait => {
+                    traitCounts[trait] = (traitCounts[trait] || 0) + 1;
+                });
+            });
+            
+            // Find best matching character
+            let bestMatch = null;
+            let bestScore = 0;
+            
+            Object.entries(quizData.characters).forEach(([charName, charData]) => {
+                const score = charData.traits.reduce((sum, trait) => 
+                    sum + (traitCounts[trait] || 0), 0);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = charName;
+                }
+            });
+            
+            displayResult(bestMatch, traitCounts);
+        }
+        
+        function displayResult(character, traits) {
+            document.getElementById('quizQuestions').style.display = 'none';
+            document.getElementById('quizResult').style.display = 'block';
+            
+            const charData = quizData.characters[character];
+            
+            // Set character image
+            const charImage = document.getElementById('resultCharacterImage');
+            charImage.src = characterImages[character] || `https://via.placeholder.com/250?text=${encodeURIComponent(character)}`;
+            charImage.alt = character;
+            
+            // Set character details
+            document.getElementById('resultCharacter').textContent = character;
+            document.getElementById('resultQuote').textContent = `"${charData.quote}"`;
+            document.getElementById('resultDescription').textContent = charData.description;
+            
+            // Display stats
+            const topTraits = Object.entries(traits)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3);
+            
+            document.getElementById('resultStats').innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-label">Dialog Lines</div>
+                    <div class="stat-value">${charData.total_lines || 'N/A'}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Your Top Trait</div>
+                    <div class="stat-value">${topTraits[0][0]}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Match Score</div>
+                    <div class="stat-value">${Math.round(topTraits.reduce((s, t) => s + t[1], 0) / quizData.questions.length * 100)}%</div>
+                </div>
+            `;
+        }
+        
+        function restartQuiz() {
+            document.getElementById('quizResult').style.display = 'none';
+            document.getElementById('quizStart').style.display = 'block';
+            currentQuestion = 0;
+            userAnswers = [];
+        }
+        
+        // Sentiment Functions
+        async function loadSentimentData() {
+            try {
+                const response = await fetch('./data/sentiment_summary.json');
+                if (!response.ok) throw new Error('Sentiment data not found');
+                sentimentData = await response.json();
+            } catch (error) {
+                console.log('Using sample sentiment data');
+                sentimentData = getSampleSentimentData();
+            }
+            
+            renderSentimentData();
+        }
+        
+        function renderSentimentData() {
+            const grid = document.getElementById('sentimentGrid');
+            
+            if (!sentimentData) {
+                grid.innerHTML = '<p style="text-align: center; color: #e74c3c;">❌ No sentiment data available</p>';
+                return;
+            }
+            
+            // Extract character data from the JSON structure
+            let characterData = [];
+            if (Array.isArray(sentimentData)) {
+                characterData = sentimentData;
+            } else if (sentimentData.character_sentiment) {
+                characterData = sentimentData.character_sentiment;
+            } else if (typeof sentimentData === 'object') {
+                characterData = Object.entries(sentimentData).map(([name, data]) => ({
+                    Character: name,
+                    ...data
+                }));
+            }
+            
+            if (characterData.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">No character data available</p>';
+                return;
+            }
+            
+            // Sort by total lines and take top characters
+            characterData.sort((a, b) => {
+                const linesA = a['Total Lines'] || a.total_lines || a.lines || 0;
+                const linesB = b['Total Lines'] || b.total_lines || b.lines || 0;
+                return linesB - linesA;
+            });
+            
+            const topCharacters = characterData.slice(0, 16);
+            
+            grid.innerHTML = topCharacters.map(char => {
+                const charName = char.Character || char.character || char.name || 'Unknown';
+                const totalLines = char['Total Lines'] || char.total_lines || char.lines || 0;
+                const positivePercent = char['Positive %'] || char.positive_percent || char.positive || 50;
+                const negativePercent = char['Negative %'] || char.negative_percent || char.negative || 50;
+                const confidence = char['Avg Confidence'] || char.avg_confidence || char.confidence || 0.85;
+                
+                const imageUrl = characterImages[charName.toUpperCase()] || 
+                                characterImages[charName] ||
+                                `web-app/assets/images/characters/${charName.toLowerCase()}.jpg`;
+                
+                return `
+                    <div class="sentiment-item">
+                        <img src="${imageUrl}" 
+                             alt="${charName}" 
+                             class="character-image"
+                             onerror="this.src='https://via.placeholder.com/80?text=${encodeURIComponent(charName.charAt(0))}'">
+                        <div class="character-name">${charName}</div>
+                        <div style="margin: 15px 0;">
+                            <div style="color: var(--dark-gold); margin-bottom: 5px; display: flex; justify-content: space-between;">
+                                <span>Positive</span>
+                                <span style="color: var(--gold); font-weight: 600;">${positivePercent.toFixed(1)}%</span>
+                            </div>
+                            <div class="sentiment-bar">
+                                <div class="sentiment-fill positive-bar" style="width: ${Math.min(positivePercent, 100)}%">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <div style="color: var(--dark-gold); margin-bottom: 5px; display: flex; justify-content: space-between;">
+                                <span>Negative</span>
+                                <span style="color: var(--gold); font-weight: 600;">${negativePercent.toFixed(1)}%</span>
+                            </div>
+                            <div class="sentiment-bar">
+                                <div class="sentiment-fill negative-bar" style="width: ${Math.min(negativePercent, 100)}%">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center; color: var(--dark-gold); font-size: 0.9rem;">
+                            Total Lines: <span style="color: var(--gold);">${totalLines}</span> | 
+                            Confidence: <span style="color: var(--gold);">${confidence.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Search Functions
+        function handleSearchEnter(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+        
+        async function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (!query) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">Please enter a search query</p>';
+                return;
+            }
+            
+            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Searching dialogs...</p></div>';
+            
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        top_k: 5
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Search failed');
+                }
+                
+                const data = await response.json();
+                const results = data.results;
+                
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">No results found</p>';
+                    return;
+                }
+                
+                resultsDiv.innerHTML = results.map((result, idx) => `
+                    <div class="search-result" style="animation-delay: ${idx * 0.1}s">
+                        <div class="search-result-header">
+                            <span class="result-character-name">${result.character}</span>
+                            <span class="similarity-score">${Math.round(result.similarity * 100)}% Match</span>
+                        </div>
+                        <div class="result-dialog">"${result.dialog}"</div>
+                        <div class="result-meta">
+                            Movie: ${result.movie} | Sentiment: ${result.sentiment}
+                        </div>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsDiv.innerHTML = `
+                    <p style="text-align: center; color: #e74c3c;">
+                        ❌ Search failed. Make sure the Flask API is running on port 5000.
+                        <br><br>
+                        Run: <code style="background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px;">python api.py</code>
+                    </p>
+                `;
+            }
+        }
+        
+        // Topics Functions
+        async function loadTopicsData() {
+            try {
+                const response = await fetch('./data/topic_modeling_results.json');
+                if (!response.ok) throw new Error('Topics data not found');
+                topicsData = await response.json();
+            } catch (error) {
+                console.log('Using sample topics data');
+                topicsData = getSampleTopicsData();
+            }
+            
+            renderTopicsData();
+        }
+        
+        function renderTopicsData() {
+            const grid = document.getElementById('topicsGrid');
+            
+            if (!topicsData) {
+                grid.innerHTML = '<p style="text-align: center; color: #e74c3c;">❌ No topics data available</p>';
+                return;
+            }
+            
+            // Extract topics from the JSON structure
+            let topics = {};
+            let labels = {};
+            
+            if (topicsData.topics) {
+                topics = topicsData.topics;
+                labels = topicsData.topic_labels || {};
+            } else if (Array.isArray(topicsData)) {
+                topicsData.forEach((topic, index) => {
+                    topics[`Topic ${index + 1}`] = topic.words || topic.keywords || [];
+                    labels[`Topic ${index + 1}`] = topic.label || `Theme ${index + 1}`;
+                });
+            } else if (typeof topicsData === 'object') {
+                topics = topicsData;
+                Object.keys(topicsData).forEach((key, index) => {
+                    labels[key] = key.replace('Topic ', 'Theme ');
+                });
+            }
+            
+            if (Object.keys(topics).length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">No topics available</p>';
+                return;
+            }
+            
+            grid.innerHTML = Object.entries(topics).map(([topicName, words]) => {
+                const label = labels[topicName] || topicName.replace('Topic ', 'Theme ');
+                const wordArray = Array.isArray(words) ? words : 
+                                 typeof words === 'string' ? words.split(',').map(w => w.trim()) : [];
+                
+                const imageUrl = topicImages[topicName] || 
+                                `web-app/assets/images/topics/${topicName.toLowerCase().replace(' ', '')}.jpg`;
+                
+                return `
+                    <div class="topic-card">
+                        <img src="${imageUrl}" 
+                             alt="${label}" 
+                             class="topic-image"
+                             onerror="this.src='https://via.placeholder.com/400x150?text=${encodeURIComponent(label)}'">
+                        <div class="topic-title">${topicName}</div>
+                        <div style="color: var(--dark-gold); margin: 10px 0; font-size: 1.1rem; font-style: italic;">
+                            ${label}
+                        </div>
+                        <div class="topic-words">
+                            ${wordArray.slice(0, 10).map(word => 
+                                `<span class="topic-word">${word}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Sample Data Functions (Fallback)
+        function getSampleSentimentData() {
+            return [
+                { Character: "GANDALF", "Total Lines": 568, "Positive %": 62.5, "Negative %": 37.5, "Avg Confidence": 0.89 },
+                { Character: "FRODO", "Total Lines": 512, "Positive %": 48.2, "Negative %": 51.8, "Avg Confidence": 0.85 },
+                { Character: "SAM", "Total Lines": 398, "Positive %": 71.3, "Negative %": 28.7, "Avg Confidence": 0.91 },
+                { Character: "ARAGORN", "Total Lines": 445, "Positive %": 58.7, "Negative %": 41.3, "Avg Confidence": 0.87 },
+                { Character: "LEGOLAS", "Total Lines": 267, "Positive %": 55.1, "Negative %": 44.9, "Avg Confidence": 0.84 },
+                { Character: "GIMLI", "Total Lines": 234, "Positive %": 64.8, "Negative %": 35.2, "Avg Confidence": 0.88 },
+                { Character: "BOROMIR", "Total Lines": 189, "Positive %": 52.4, "Negative %": 47.6, "Avg Confidence": 0.83 },
+                { Character: "ÉOWYN", "Total Lines": 156, "Positive %": 59.6, "Negative %": 40.4, "Avg Confidence": 0.86 },
+                { Character: "MERRY", "Total Lines": 176, "Positive %": 67.6, "Negative %": 32.4, "Avg Confidence": 0.85 },
+                { Character: "PIPPIN", "Total Lines": 189, "Positive %": 69.3, "Negative %": 30.7, "Avg Confidence": 0.86 },
+                { Character: "GALADRIEL", "Total Lines": 89, "Positive %": 61.8, "Negative %": 38.2, "Avg Confidence": 0.92 },
+                { Character: "ELROND", "Total Lines": 112, "Positive %": 58.9, "Negative %": 41.1, "Avg Confidence": 0.87 },
+                { Character: "FARAMIR", "Total Lines": 145, "Positive %": 56.3, "Negative %": 43.7, "Avg Confidence": 0.84 },
+                { Character: "THÉODEN", "Total Lines": 167, "Positive %": 54.8, "Negative %": 45.2, "Avg Confidence": 0.86 },
+                { Character: "SARUMAN", "Total Lines": 134, "Positive %": 38.9, "Negative %": 61.1, "Avg Confidence": 0.91 },
+                { Character: "GOLLUM", "Total Lines": 278, "Positive %": 32.7, "Negative %": 67.3, "Avg Confidence": 0.88 }
+            ];
+        }
+        
+        function getSampleTopicsData() {
+            return {
+                topics: {
+                    "Topic 1": ["war", "battle", "fight", "army", "sword", "enemy", "death", "kill", "soldier", "attack"],
+                    "Topic 2": ["friend", "help", "together", "trust", "loyalty", "companion", "brotherhood", "fellowship", "support", "ally"],
+                    "Topic 3": ["ring", "power", "precious", "dark", "evil", "destroy", "burden", "corruption", "temptation", "master"],
+                    "Topic 4": ["journey", "road", "path", "walk", "mountain", "travel", "quest", "destination", "way", "road"],
+                    "Topic 5": ["fear", "danger", "dark", "shadow", "terror", "dread", "horror", "threat", "night", "black"],
+                    "Topic 6": ["hope", "courage", "brave", "heart", "strength", "light", "faith", "believe", "future", "dawn"],
+                    "Topic 7": ["death", "die", "end", "fall", "sacrifice", "perish", "fate", "doom", "grave", "memory"],
+                    "Topic 8": ["home", "shire", "peace", "garden", "comfort", "rest", "safe", "return", "family", "earth"]
+                },
+                topic_labels: {
+                    "Topic 1": "War & Battle",
+                    "Topic 2": "Friendship & Loyalty",
+                    "Topic 3": "The Ring & Power",
+                    "Topic 4": "Journey & Quest",
+                    "Topic 5": "Fear & Danger",
+                    "Topic 6": "Hope & Courage",
+                    "Topic 7": "Death & Sacrifice",
+                    "Topic 8": "Home & Peace"
+                }
+            };
+        }
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', loadAllData);
+    </script>
+    
+</body>
+</html>

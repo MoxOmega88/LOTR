@@ -1,0 +1,462 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "When faced with overwhelming danger, you:",
+      "options": [
+        {
+          "text": "Face it head-on, no matter the cost",
+          "traits": [
+            "brave",
+            "courageous",
+            "determined"
+          ]
+        },
+        {
+          "text": "Seek wisdom before acting",
+          "traits": [
+            "wise",
+            "thoughtful",
+            "strategic"
+          ]
+        },
+        {
+          "text": "Stand by your friends, supporting them",
+          "traits": [
+            "loyal",
+            "devoted",
+            "protective"
+          ]
+        },
+        {
+          "text": "Use cunning and deception",
+          "traits": [
+            "cunning",
+            "clever",
+            "manipulative"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Your greatest strength is:",
+      "options": [
+        {
+          "text": "My unwavering loyalty",
+          "traits": [
+            "loyal",
+            "devoted",
+            "humble"
+          ]
+        },
+        {
+          "text": "My wisdom and knowledge",
+          "traits": [
+            "wise",
+            "eloquent",
+            "mysterious"
+          ]
+        },
+        {
+          "text": "My combat skills",
+          "traits": [
+            "skilled",
+            "action-oriented",
+            "fierce"
+          ]
+        },
+        {
+          "text": "My determination",
+          "traits": [
+            "determined",
+            "brave",
+            "serious"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "In a group, you are usually:",
+      "options": [
+        {
+          "text": "The wise advisor",
+          "traits": [
+            "wise",
+            "thoughtful",
+            "protective"
+          ]
+        },
+        {
+          "text": "The natural leader",
+          "traits": [
+            "leader",
+            "noble",
+            "courageous"
+          ]
+        },
+        {
+          "text": "The loyal companion",
+          "traits": [
+            "loyal",
+            "humble",
+            "devoted"
+          ]
+        },
+        {
+          "text": "The comic relief",
+          "traits": [
+            "humorous",
+            "mischievous",
+            "curious"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "What motivates you most?",
+      "options": [
+        {
+          "text": "Protecting those I love",
+          "traits": [
+            "protective",
+            "loyal",
+            "brave"
+          ]
+        },
+        {
+          "text": "Fulfilling my destiny",
+          "traits": [
+            "noble",
+            "determined",
+            "burdened"
+          ]
+        },
+        {
+          "text": "Seeking power and knowledge",
+          "traits": [
+            "ambitious",
+            "powerful",
+            "cunning"
+          ]
+        },
+        {
+          "text": "Preserving the greater good",
+          "traits": [
+            "wise",
+            "balanced",
+            "compassionate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Your speaking style is:",
+      "options": [
+        {
+          "text": "Wise and poetic",
+          "traits": [
+            "wise",
+            "eloquent",
+            "ethereal"
+          ]
+        },
+        {
+          "text": "Direct and to the point",
+          "traits": [
+            "direct",
+            "action-oriented",
+            "fierce"
+          ]
+        },
+        {
+          "text": "Warm and encouraging",
+          "traits": [
+            "optimistic",
+            "compassionate",
+            "devoted"
+          ]
+        },
+        {
+          "text": "Witty with humor",
+          "traits": [
+            "humorous",
+            "clever",
+            "mischievous"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "When tempted by power, you:",
+      "options": [
+        {
+          "text": "Resist with all your might",
+          "traits": [
+            "brave",
+            "determined",
+            "noble"
+          ]
+        },
+        {
+          "text": "Feel the weight of the burden",
+          "traits": [
+            "burdened",
+            "conflicted",
+            "serious"
+          ]
+        },
+        {
+          "text": "Are not interested - loyalty matters more",
+          "traits": [
+            "loyal",
+            "humble",
+            "devoted"
+          ]
+        },
+        {
+          "text": "Would be tempted to use it for good",
+          "traits": [
+            "ambitious",
+            "conflicted",
+            "fallen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Your ideal role in a quest:",
+      "options": [
+        {
+          "text": "The ringbearer - carrying the burden",
+          "traits": [
+            "brave",
+            "burdened",
+            "determined"
+          ]
+        },
+        {
+          "text": "The guide who shows the way",
+          "traits": [
+            "wise",
+            "powerful",
+            "protective"
+          ]
+        },
+        {
+          "text": "The faithful companion",
+          "traits": [
+            "loyal",
+            "devoted",
+            "optimistic"
+          ]
+        },
+        {
+          "text": "The skilled warrior",
+          "traits": [
+            "skilled",
+            "graceful",
+            "fierce"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "How do you handle conflict?",
+      "options": [
+        {
+          "text": "With diplomatic wisdom",
+          "traits": [
+            "wise",
+            "balanced",
+            "thoughtful"
+          ]
+        },
+        {
+          "text": "With fierce determination",
+          "traits": [
+            "fierce",
+            "stubborn",
+            "brave"
+          ]
+        },
+        {
+          "text": "By supporting others",
+          "traits": [
+            "loyal",
+            "protective",
+            "humble"
+          ]
+        },
+        {
+          "text": "With cunning strategy",
+          "traits": [
+            "clever",
+            "cunning",
+            "observant"
+          ]
+        }
+      ]
+    }
+  ],
+  "characters": {
+    "FRODO": {
+      "traits": [
+        "brave",
+        "burdened",
+        "determined",
+        "compassionate"
+      ],
+      "quote": " and proud of     it! Cheers Gaffer!\u00a0 \u00a0",
+      "positive_ratio": 0.44,
+      "avg_words": 7.8,
+      "total_lines": 225,
+      "description": "You embody brave, burdened, determined"
+    },
+    "SAM": {
+      "traits": [
+        "loyal",
+        "brave",
+        "optimistic",
+        "humble",
+        "devoted"
+      ],
+      "quote": "It's very special, that.It's the best salt in all the Shire.\u00a0",
+      "positive_ratio": 0.38,
+      "avg_words": 9.6,
+      "total_lines": 216,
+      "description": "You embody loyal, brave, optimistic"
+    },
+    "GANDALF": {
+      "traits": [
+        "wise",
+        "powerful",
+        "protective",
+        "mysterious"
+      ],
+      "quote": "It's good to see you. One hundred and eleven years old     who would believe it. ,     You haven't a...",
+      "positive_ratio": 0.49,
+      "avg_words": 15.5,
+      "total_lines": 204,
+      "description": "You embody wise, powerful, protective"
+    },
+    "ARAGORN": {
+      "traits": [
+        "noble",
+        "leader",
+        "courageous",
+        "humble"
+      ],
+      "quote": "I will go!\u00a0",
+      "positive_ratio": 0.49,
+      "avg_words": 7.7,
+      "total_lines": 185,
+      "description": "You embody noble, leader, courageous"
+    },
+    "PIPPIN": {
+      "traits": [
+        "curious",
+        "brave",
+        "mischievous",
+        "loyal"
+      ],
+      "quote": "Oh, yes. It's a quality establishment. I hear the staff are very good.      \u00a0    ",
+      "positive_ratio": 0.48,
+      "avg_words": 6.9,
+      "total_lines": 163,
+      "description": "You embody curious, brave, mischievous"
+    },
+    "MERRY": {
+      "traits": [
+        "clever",
+        "brave",
+        "loyal",
+        "humorous"
+      ],
+      "quote": "It's good. Definitely from the Shire. ,Longbottom leaf eh? \u00a0",
+      "positive_ratio": 0.53,
+      "avg_words": 6.4,
+      "total_lines": 137,
+      "description": "You embody clever, brave, loyal"
+    },
+    "GOLLUM": {
+      "traits": [
+        "obsessive",
+        "conflicted",
+        "cunning",
+        "tragic"
+      ],
+      "quote": "So bright.So beautiful.\u00a0",
+      "positive_ratio": 0.4,
+      "avg_words": 9.9,
+      "total_lines": 133,
+      "description": "You embody obsessive, conflicted, cunning"
+    },
+    "GIMLI": {
+      "traits": [
+        "fierce",
+        "loyal",
+        "stubborn",
+        "humorous"
+      ],
+      "quote": "Strong?! ,Oh, that's good.\u00a0",
+      "positive_ratio": 0.45,
+      "avg_words": 8.7,
+      "total_lines": 115,
+      "description": "You embody fierce, loyal, stubborn"
+    },
+    "THEODEN": {
+      "traits": [
+        "serious",
+        "thoughtful"
+      ],
+      "quote": "A great host, you say?\u00a0",
+      "positive_ratio": 0.44,
+      "avg_words": 11.2,
+      "total_lines": 109,
+      "description": "You embody serious, thoughtful"
+    },
+    "FARAMIR": {
+      "traits": [
+        "serious",
+        "thoughtful"
+      ],
+      "quote": "Good speech. Nice and short.\u00a0",
+      "positive_ratio": 0.4,
+      "avg_words": 12.6,
+      "total_lines": 65,
+      "description": "You embody serious, thoughtful"
+    },
+    "EOWYN": {
+      "traits": [
+        "serious",
+        "direct",
+        "action-oriented"
+      ],
+      "quote": "    Courage Merry. Courage for our friends. \u00a0",
+      "positive_ratio": 0.44,
+      "avg_words": 9.1,
+      "total_lines": 55,
+      "description": "You embody serious, direct, action-oriented"
+    },
+    "LEGOLAS": {
+      "traits": [
+        "graceful",
+        "skilled",
+        "observant",
+        "loyal"
+      ],
+      "quote": " Have you     heard nothing Lord Elrond has said? The Ring must be destroyed\u00a0",
+      "positive_ratio": 0.49,
+      "avg_words": 8.8,
+      "total_lines": 55,
+      "description": "You embody graceful, skilled, observant"
+    }
+  }
+}
