@@ -1469,64 +1469,63 @@ function debugImageLoading() {
         }
         
         async function performSearch() {
-            const query = document.getElementById('searchInput').value.trim();
-            const resultsDiv = document.getElementById('searchResults');
-            
-            if (!query) {
-                resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">Please enter a search query</p>';
-                return;
-            }
-            
-            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Searching dialogs...</p></div>';
-            
-            try {
-                const response = await fetch('http://127.0.0.1:5000/api/search', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query: query,
-                        top_k: 5
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Search failed');
-                }
-                
-                const data = await response.json();
-                const results = data.results;
-                
-                if (results.length === 0) {
-                    resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">No results found</p>';
-                    return;
-                }
-                
-                resultsDiv.innerHTML = results.map((result, idx) => `
-                    <div class="search-result" style="animation-delay: ${idx * 0.1}s">
-                        <div class="search-result-header">
-                            <span class="result-character-name">${result.character}</span>
-                            <span class="similarity-score">${Math.round(result.similarity * 100)}% Match</span>
-                        </div>
-                        <div class="result-dialog">"${result.dialog}"</div>
-                        <div class="result-meta">
-                            Movie: ${result.movie} | Sentiment: ${result.sentiment}
-                        </div>
-                    </div>
-                `).join('');
-                
-            } catch (error) {
-                console.error('Search error:', error);
-                resultsDiv.innerHTML = `
-                    <p style="text-align: center; color: #e74c3c;">
-                        ❌ Search failed. Make sure the Flask API is running on port 5000.
-                        <br><br>
-                        Run: <code style="background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px;">python api.py</code>
-                    </p>
-                `;
-            }
+    const query = document.getElementById('searchInput').value.trim();
+    const resultsDiv = document.getElementById('searchResults');
+    
+    if (!query) {
+        resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">Please enter a search query</p>';
+        return;
+    }
+    
+    resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Searching dialogs...</p></div>';
+    
+    try {
+        // Use relative URL for production, works both locally and deployed
+        const response = await fetch('/api/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                top_k: 5
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Search failed');
         }
+        
+        const data = await response.json();
+        const results = data.results;
+        
+        if (results.length === 0) {
+            resultsDiv.innerHTML = '<p style="text-align: center; color: var(--dark-gold);">No results found</p>';
+            return;
+        }
+        
+        resultsDiv.innerHTML = results.map((result, idx) => `
+            <div class="search-result" style="animation-delay: ${idx * 0.1}s">
+                <div class="search-result-header">
+                    <span class="result-character-name">${result.character}</span>
+                    <span class="similarity-score">${Math.round(result.similarity * 100)}% Match</span>
+                </div>
+                <div class="result-dialog">"${result.dialog}"</div>
+                <div class="result-meta">
+                    Movie: ${result.movie} | Sentiment: ${result.sentiment}
+                </div>
+            </div>
+        `).join('');
+        
+    } catch (error) {
+        console.error('Search error:', error);
+        resultsDiv.innerHTML = `
+            <p style="text-align: center; color: #e74c3c;">
+                ❌ Search is temporarily unavailable. Please try again later.
+            </p>
+        `;
+    }
+}
         
         // Topics Functions
         async function loadTopicsData() {
